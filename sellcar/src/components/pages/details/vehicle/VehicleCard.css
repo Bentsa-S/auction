@@ -1,0 +1,62 @@
+.vehicle-card {
+    border: 1px solid #f4c542;
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+    position: relative;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+  
+  .share-button {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  
+  td {
+    padding: 8px 4px;
+    vertical-align: top;
+  }
+  
+  td:first-child {
+    font-weight: bold;
+    width: 50%;
+    color: #555;
+  }
+  
+  td:last-child {
+    color: #222;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  
+  .highlight {
+    color: #b30000;
+    font-weight: bold;
+  }
+  

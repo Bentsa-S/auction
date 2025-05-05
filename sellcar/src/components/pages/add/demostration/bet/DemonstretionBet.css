@@ -1,0 +1,96 @@
+.auction-bet-container {
+    border: 1px solid #f4c542;
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    background: #fff;
+  }
+  
+  .auction-bet-start-time {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  
+  .auction-bet-progress-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  
+  .auction-bet-progress {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .auction-bet-progress img {
+    width: 30px;
+    margin-bottom: 8px;
+  }
+  
+  .auction-bet-progress-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .auction-bet-progress-bid {
+    font-size: 22px;
+    color: #4B7BE5;
+  }
+  
+  .auction-bet-progress-description {
+    font-size: 14px;
+  }
+  
+  .auction-bet-button-container {
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  
+  .auction-bet-button {
+    background-color: #FFD700;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 6px;
+  }
+  
+  .auction-bet-actions-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .auction-bet-action-button {
+    background-color: #FFDA6A;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .auction-bet-current-bid {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-weight: 600;
+  }
+  
+  .auction-bet-total-price {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  

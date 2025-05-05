@@ -1,0 +1,60 @@
+.car-details {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .left-section {
+    flex: 2;
+  }
+  
+  .right-section {
+    flex: 1;
+  }
+  
+  .main-image {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .thumbnail-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .thumbnail {
+    width: 80px;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .icons-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  
+  .bid-info h2 {
+    margin: 10px 0;
+  }
+  
+  .make-bid {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .make-bid input {
+    width: 100px;
+    padding: 5px;
+  }
+  
+  .location-box {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  

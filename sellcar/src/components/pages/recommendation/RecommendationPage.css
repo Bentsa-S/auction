@@ -1,0 +1,52 @@
+.page {
+    background-color: #f0f4f8;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .filter {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .filter h3 {
+    margin-bottom: 10px;
+  }
+  
+  .filter textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    resize: none;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  .filter button {
+    padding: 6px 20px;
+    background-color: gold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .recommendations-header {
+    background-color: #f0cb3a;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  

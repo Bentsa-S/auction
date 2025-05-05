@@ -1,0 +1,116 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    max-width: 1200px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+  
+    .header {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: url("../../../assets/main-img-car-white.png") no-repeat center center;
+        background-size: cover;
+        width: 80vw;
+        height: 40vh; // Робить блок майже на весь екран
+        color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        
+        .stats {
+            text-align: center;
+          
+            .counter {
+              font-weight: bold;
+              display: flex;
+          
+              .digit {
+                background-color: rgba(0, 0, 0, 0.5); // Прозоро темний фон
+                padding: 0.2rem 0.5rem;
+                margin: 0 0.1rem;
+                border-radius: 5px;
+                border: solid #af8f0d 1px;
+                font-size: 5rem;
+
+              }
+            }
+          
+            span {
+              display: block;
+              font-size: 2rem;
+              margin-top: 5px;
+            }
+          }
+    }
+  
+    .info {
+      text-align: center;
+      margin: 40px 0;
+  
+      h2 {
+        font-size: 24px;
+        font-weight: bold;
+      }
+  
+      h3 {
+        font-size: 20px;
+        color: #777;
+      }
+  
+      ul {
+        list-style: none;
+        padding: 0;
+  
+        li {
+          font-size: 18px;
+          margin: 10px 0;
+          &:before {
+            content: "✔";
+            color: green;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  
+    .map-container {
+      width: 100%;
+      height: 300px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+    }
+  
+    .steps {
+      text-align: center;
+      margin-top: 40px;
+  
+      h2 {
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+  
+      .steps-list {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+  
+        .step {
+          flex: 1;
+          background: #ffcc00;
+          padding: 15px;
+          font-size: 18px;
+          font-weight: bold;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+  

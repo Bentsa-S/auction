@@ -1,0 +1,89 @@
+.wrapper {
+    padding: 20px;
+  }
+  
+  .title {
+    text-align: center;
+    border: 5px solid gold;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    border-bottom: 2px solid gold;
+  }
+  
+  .input,
+  .textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  .textarea {
+    height: 80px;
+    resize: vertical;
+  }
+  
+  .photosWrapper {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  
+  .photo {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+  }
+  
+  .addPhoto {
+    width: 60px;
+    height: 60px;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 24px;
+    background: #fff;
+  }
+
+  .car-details {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+
+  .left-section {
+    flex: 2;
+  }
+
+  .right-section {
+    flex: 1;
+  }
+
+  .submit-button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: gold;
+    border: none;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: rgb(170, 149, 34);
+  }
+  
+  
