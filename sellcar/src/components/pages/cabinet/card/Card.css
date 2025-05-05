@@ -1,0 +1,39 @@
+.card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .card img {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .data-info{
+    margin-top: 20px;
+    display: flex;
+  }
+  .card-info {
+    flex: 1;
+    font-size: 14px;
+  }
+  
+  .stats-button {
+    background-color: #f5d55f;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    margin-top: auto;
+    height: fit-content;
+  }
+  

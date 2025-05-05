@@ -6,6 +6,7 @@ import CarDetails from "./components/pages/details/CarDetails"
 import AddAuctionForm from "./components/pages/add/AddAuctionForm"
 
 import './App.css'
+import CabinetPage from "./components/pages/cabinet/CabinetPage"
 function App() {
 
   return (
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/recomendation" element={<RecommendationPage/>} />
         <Route path="/cars" element={<AddAuctionForm/>} />
-        <Route path="/computers" element={<div>Сторінка ноутбуків і ПК</div>} />
+        <Route path="/computers" element={<CabinetPage/>} />
         <Route path="/fashion" element={<div>Сторінка моди</div>} />
         <Route path="/home" element={<div>Сторінка дому</div>} />
         <Route path="*" element={<MainPage/>} />
