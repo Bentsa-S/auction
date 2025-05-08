@@ -7,6 +7,7 @@ import AddAuctionForm from "./components/pages/add/AddAuctionForm"
 
 import './App.css'
 import CabinetPage from "./components/pages/cabinet/CabinetPage"
+import Statistick from "./components/pages/statistick/Statistick"
 function App() {
 
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/recomendation" element={<RecommendationPage/>} />
         <Route path="/cars" element={<AddAuctionForm/>} />
         <Route path="/computers" element={<CabinetPage/>} />
-        <Route path="/fashion" element={<div>Сторінка моди</div>} />
+        <Route path="/statistick/:id" element={<Statistick/>} />
         <Route path="/home" element={<div>Сторінка дому</div>} />
         <Route path="*" element={<MainPage/>} />
         <Route path="/car/:id" element={<CarDetails />} />

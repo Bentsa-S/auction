@@ -48,12 +48,13 @@ const AuthPanel: React.FC<Props> = ({ isOpen, onClose }) => {
   return (
     <div className={`auth-overlay ${isOpen ? 'show' : ''}`}>
       <div className="auth-modal">
-        <button className="close-btn" onClick={onClose}>×</button>
-        <h2>{isLogin ? 'Вхід' : 'Реєстрація'}</h2>
+        <button className="auth-close-btn" onClick={onClose}>×</button>
+        <h2 className="auth-title">{isLogin ? 'Вхід' : 'Реєстрація'}</h2>
 
         <form onSubmit={handleSubmit}>
           {!isLogin && (  
             <input
+              className="auth-input"
               type="email"
               placeholder="Email"
               value={email}
@@ -62,6 +63,7 @@ const AuthPanel: React.FC<Props> = ({ isOpen, onClose }) => {
             />
           )}
           <input
+            className="auth-input"
             type="text"
             placeholder="Ім’я"
             value={name}
@@ -69,6 +71,7 @@ const AuthPanel: React.FC<Props> = ({ isOpen, onClose }) => {
             required
           />
           <input
+            className="auth-input"
             type="password"
             placeholder="Пароль"
             value={password}
@@ -77,6 +80,7 @@ const AuthPanel: React.FC<Props> = ({ isOpen, onClose }) => {
           />
           {!isLogin && (
             <input
+              className="auth-input"
               type="password"
               placeholder="Повторіть пароль"
               value={confirmPassword}
@@ -84,17 +88,17 @@ const AuthPanel: React.FC<Props> = ({ isOpen, onClose }) => {
               required
             />
           )}
-          <button type="submit">{isLogin ? 'Увійти' : 'Зареєструватися'}</button>
+          <button className="auth-submit-btn" type="submit">{isLogin ? 'Увійти' : 'Зареєструватися'}</button>
         </form>
 
         <div className="toggle-text">
           {isLogin ? (
             <>
-              Немає акаунту? <button onClick={toggleMode}>Зареєструйтесь</button>
+              Немає акаунту? <button className="auth-toggle-btn" onClick={toggleMode}>Зареєструйтесь</button>
             </>
           ) : (
             <>
-              Вже є акаунт? <button onClick={toggleMode}>Увійдіть</button>
+              Вже є акаунт? <button className="auth-toggle-btn" onClick={toggleMode}>Увійдіть</button>
             </>
           )}
         </div>

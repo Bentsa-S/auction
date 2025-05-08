@@ -60,7 +60,6 @@ const VehicleCard: React.FC = () => {
   return (
     <div className="vehicle-card">
       <h2 className="title">Информация о транспортном средстве</h2>
-      <button className="share-button">Поделиться</button>
 
       <table>
         <tbody>

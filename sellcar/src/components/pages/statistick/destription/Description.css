@@ -1,0 +1,45 @@
+.vehicle-card {
+    border: 1px solid #f4c542;
+    background: #fff;
+    border-radius: 16px;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 24px;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+    position: relative;
+  }
+  
+  .vehicle-card p {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.5;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .share-button {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  
+  .highlight {
+    color: #b30000;
+    font-weight: bold;
+  }
+  

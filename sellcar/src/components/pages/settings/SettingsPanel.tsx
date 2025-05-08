@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './SettingsPanel.css';
 
 interface Props {
@@ -6,13 +6,30 @@ interface Props {
 }
 
 const SettingsPanel: React.FC<Props> = ({ onClose }) => {
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleClose = () => {
+    setIsClosing(true);
+  };
+
+  useEffect(() => {
+    if (isClosing) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 300); // тривалість анімації
+      return () => clearTimeout(timer);
+    }
+  }, [isClosing, onClose]);
+
   return (
-    <div className="overlay">
-      <div className="panel">
-        <button className="closeBtn" onClick={onClose}>✖</button>
+    <div className={`overlay ${isClosing ? 'overlayClosing' : ''}`} onClick={handleClose}>
+      <div
+        className={`panel ${isClosing ? 'panelClosing' : ''}`}
+        onClick={(e) => e.stopPropagation()} // щоб клік по панелі не закривав
+      >
+        <button className="closeBtn" onClick={handleClose}>✖</button>
         <h2>Налаштування сайту</h2>
         <p>Тут будуть ваші опції налаштувань</p>
-        {/* Додай тут контент */}
       </div>
     </div>
   );

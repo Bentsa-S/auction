@@ -1,7 +1,6 @@
 import React from 'react';
 import './CabinetPage.css';
 import Card from './card/Card';
-import CumulativeChart from '../statistick/chart/CumulativeChart';
 
 const CabinetPage: React.FC = () => {
   return (
@@ -40,15 +39,6 @@ const CabinetPage: React.FC = () => {
         id='1'
         />
 
-        <CumulativeChart
-          data={[
-            { date: '2024-12-14 09:00', amount: 1000, name: 'Іван' },
-            { date: '2024-12-14 10:00', amount: 500, name: 'Оля' },
-            { date: '2024-12-14 12:00', amount: 800, name: 'Іван' },
-            { date: '2024-12-14 14:00', amount: 700, name: 'Марія' },
-            { date: '2024-12-14 16:00', amount: 1200, name: 'Олег' },
-          ]}            
-        />
     </div>
   );
 };
