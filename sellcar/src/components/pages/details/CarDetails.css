@@ -1,60 +1,83 @@
-.car-details {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    font-family: sans-serif;
+.car-details-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background-color: #f4c542;
+  animation: slideDown 1s ease forwards;
+  z-index: 9999;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
   }
-  
-  .left-section {
-    flex: 2;
+  100% {
+    transform: translateY(100vh);
   }
-  
-  .right-section {
-    flex: 1;
-  }
-  
-  .main-image {
-    width: 100%;
-    border-radius: 8px;
-  }
-  
-  .thumbnail-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .thumbnail {
-    width: 80px;
-    height: auto;
-    border-radius: 4px;
-  }
-  
-  .icons-bar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  
-  .bid-info h2 {
-    margin: 10px 0;
-  }
-  
-  .make-bid {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  
-  .make-bid input {
-    width: 100px;
-    padding: 5px;
-  }
-  
-  .location-box {
-    margin-top: 20px;
-    font-weight: bold;
-  }
-  
+}
+
+
+.content-wrapper {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.content-wrapper.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.content-wrapper.hide {
+  pointer-events: none;
+}
+
+/* решта твого стилю нижче */
+.details {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.details-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0px 130px;
+  box-sizing: border-box;
+  border-bottom: 4px solid #f4c542;
+}
+
+.follow-button {
+  padding: 8px 20px;
+  border: 3px solid #f4c542;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.follow-button:hover {
+  background-color: #d6a900;
+}
+
+.details-title p {
+  font-size: 25px;
+}
+
+.left-section {
+  flex: 2;
+}
+
+.right-section {
+  flex: 1;
+}
