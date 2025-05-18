@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './FilterPanel.module.css';
 import CategorySearch from './CategorySearch';
+import { getCategorie } from '../../../../api/categorie';
+import { useLanguage } from '../../../../LanguageContext';
+import { translations } from '../../../../i18n';
 
-const allCategories = ['Ноутбук', 'Автомобіль', 'Телефон', 'Мода', 'Дім', 'Камера', 'Навушники'];
 
 interface FilterData {
   categorie?: string;
@@ -16,6 +18,17 @@ interface FilterPanelProps {
 const FilterPanel: React.FC<FilterPanelProps> = ({ onFilter }) => {
   const [category, setCategory] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [allCategories, setAllCategories] = useState<string[]>([]);
+  const { lang } = useLanguage();
+  const t = translations[lang];
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categorie = await getCategorie();
+      setAllCategories(categorie);
+    };
+    fetchCategories();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +40,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onFilter }) => {
 
   return (
     <div className={styles.filterContainer}>
-      <h2 className={styles.title}>Фільтр</h2>
+      <h2 className={styles.title}>{t.filter}</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <CategorySearch
           value={category}
@@ -35,11 +48,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ onFilter }) => {
           allCategories={allCategories}
         />
         <div className={styles.field}>
-          <label>Закінчення аукціона</label>
+          <label>{t.auctionEnd}</label>
           <input value={endDate} onChange={e => setEndDate(e.target.value)} type="date" />
         </div>
-
-        <button type="submit" className={styles.searchBtn}>Пошук</button>
+        <button type="submit" className={styles.searchBtn}>{t.search}</button>
       </form>
     </div>
   );

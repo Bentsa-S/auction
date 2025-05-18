@@ -4,17 +4,44 @@ import './CarDetails.css';
 import ImegeSlider from './slider/ImageSlider';
 import AuctionBet from './bet/AuctionBet';
 import VehicleCard from './vehicle/VehicleCard';
+import { followAuction, unfollowAuction } from '../../../api/auction';
+import { useParams } from 'react-router-dom';
+import { useCheckUser } from '../../../hock/useCheckUser';
+import { useLanguage } from '../../../LanguageContext';
+import { translations } from '../../../i18n';
 
 const CarDetails: React.FC = () => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams();
+  const auctionId = Number(id);
+  const token = useCheckUser(true)
+  const { lang } = useLanguage();
+  const t = translations[lang];
 
-  const handleFollowClick = () => {
-    setIsFollowing(prev => !prev);
+  const handleFollowClick = async () => {
+    setIsLoading(true);
+    try {
+      if (isFollowing) {
+        if(token){
+          await unfollowAuction(auctionId, token);
+        }
+      } else {
+        if(token){
+          await followAuction(auctionId, token);
+        }
+      }
+      setIsFollowing(prev => !prev);
+    } catch (error) {
+      console.error("Помилка при зміні підписки:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
-
+  
   useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 1000); // 1 сек затримка
+    const timer = setTimeout(() => setLoaded(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -23,9 +50,13 @@ const CarDetails: React.FC = () => {
       {!loaded && <div className="loading-line" />}
       <div className={`content-wrapper ${loaded ? 'show' : 'hide'}`}>
         <div className='details-title'>
-          <p>Title</p>
-          <button className="follow-button" onClick={handleFollowClick}>
-            {isFollowing ? 'Unfollow' : 'Follow'}
+          <p>{t.title}</p>
+          <button className='follow-button' onClick={handleFollowClick} disabled={isLoading}>
+            {isLoading
+              ? t.loading
+              : isFollowing
+                ? t.unfollow
+                : t.follow}
           </button>
         </div>
         <div className="details">

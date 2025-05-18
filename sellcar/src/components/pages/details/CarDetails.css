@@ -1,6 +1,7 @@
 .car-details-wrapper {
   position: relative;
   overflow: hidden;
+  color: var(--text-color);
 }
 
 .loading-line {
@@ -9,7 +10,7 @@
   left: 0;
   height: 4px;
   width: 100%;
-  background-color: #f4c542;
+  background-color: var(--main-color);
   animation: slideDown 1s ease forwards;
   z-index: 9999;
 }
@@ -45,6 +46,7 @@
   gap: 20px;
   padding: 20px;
   font-family: sans-serif;
+  color: var(--text-color);
 }
 
 .details-title {
@@ -52,18 +54,20 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 0px 130px;
+  padding: 20px 130px;
   box-sizing: border-box;
-  border-bottom: 4px solid #f4c542;
+  border-bottom: 4px solid var(--main-color);
+  color: var(--text-color);
 }
 
 .follow-button {
   padding: 8px 20px;
-  border: 3px solid #f4c542;
+  border: 3px solid var(--main-color);
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  color: var(--text-color);
 }
 
 .follow-button:hover {
@@ -72,12 +76,15 @@
 
 .details-title p {
   font-size: 25px;
+  color: var(--text-color);
 }
 
 .left-section {
   flex: 2;
+  color: var(--text-color);
 }
 
 .right-section {
   flex: 1;
+  color: var(--text-color);
 }

@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
 import styles from './FilterPanel.module.css';
 
+interface Category {
+  categorie: string;
+  id: number;
+  id_auction: number;
+}
+
 interface Props {
   value: string;
   onChange: (value: string) => void;
-  allCategories: string[];
+  allCategories?: Category[];
+  showLabel?: boolean;
 }
 
-const CategorySearch: React.FC<Props> = ({ value, onChange, allCategories }) => {
+const CategorySearch: React.FC<Props> = ({
+  value,
+  onChange,
+  allCategories = [],
+  showLabel = true,
+}) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -15,10 +27,16 @@ const CategorySearch: React.FC<Props> = ({ value, onChange, allCategories }) => 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     onChange(input);
+  
     if (input.length > 0) {
-      const filtered = allCategories.filter(item =>
-        item.toLowerCase().includes(input.toLowerCase())
-      );
+      const filtered = allCategories
+        .map(item => item.categorie) // витягуємо рядки
+        .filter(item =>
+          item.toLowerCase().includes(input.toLowerCase())
+        );
+  
+        console.log(allCategories);
+        
       setSuggestions(filtered);
       setShowSuggestions(true);
       setActiveIndex(-1);
@@ -27,7 +45,7 @@ const CategorySearch: React.FC<Props> = ({ value, onChange, allCategories }) => 
       setShowSuggestions(false);
     }
   };
-
+  
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
       setActiveIndex(prev => (prev < suggestions.length - 1 ? prev + 1 : 0));
@@ -48,7 +66,7 @@ const CategorySearch: React.FC<Props> = ({ value, onChange, allCategories }) => 
 
   return (
     <div className={styles.field} style={{ position: 'relative' }}>
-      <label>категорії</label>
+      {showLabel && <label>Категорії</label>}
       <input
         type="text"
         placeholder="Пошук"

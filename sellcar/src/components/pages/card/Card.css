@@ -6,9 +6,9 @@
     width: 90%;
     margin: 10px auto;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    background-color: white;
+    background-color: var(--background);
     text-decoration: none;
-
+    color: var(--text-color-on-white);
   }
   
   .car-image {
@@ -23,24 +23,25 @@
     flex-direction: column;
     gap: 6px;
     width: 100%;
-
+    color: var(--text-color);
   }
   .car-info {
     padding: 16px;
     display: flex;
     gap: 6px;
+    color: var(--text-color);
   }
   
   .car-title {
     margin: 0 0 8px;
     font-size: 18px;
     font-weight: 600;
-    color: #333;
+    color: var(--text-color-on-white);
   }
   
   .car-auction-end {
     margin-top: 10px;
-    color: #000;
+    color: var(--text-color);
     text-decoration: none;
     display: flex;
     justify-content: end;

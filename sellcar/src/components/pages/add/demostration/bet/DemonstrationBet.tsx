@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import './DemonstretionBet.css';
+import { useLanguage } from '../../../../../LanguageContext';
+import { translations } from '../../../../../i18n';
 
 interface AuctionBetleProps {
   bid: number;
@@ -21,6 +23,8 @@ const DemonstrationBet: React.FC<AuctionBetleProps> = ({
   totalPrice,
 }) => {
   const [progress, setProgress] = useState(0);
+  const { lang } = useLanguage();
+  const t = translations[lang];
 
   useEffect(() => {
     const start = new Date(startTime).getTime();
@@ -45,7 +49,7 @@ const DemonstrationBet: React.FC<AuctionBetleProps> = ({
   return (
     <div className="auction-bet-container">
       <div className="auction-bet-start-time">
-        <div>Початок ставки: {new Date(startTime).toLocaleString()}</div>
+        <div>{t.betStart}: {new Date(startTime).toLocaleString()}</div>
       </div>
 
       <div className="auction-bet-progress-wrapper">
@@ -63,18 +67,18 @@ const DemonstrationBet: React.FC<AuctionBetleProps> = ({
             />
             <div className="auction-bet-progress-title">New Jersey</div>
             <div className="auction-bet-progress-bid">${bid.toLocaleString()}</div>
-            <div className="auction-bet-progress-description">Bid!</div>
+            <div className="auction-bet-progress-description">{t.bid}</div>
           </CircularProgressbarWithChildren>
         </div>
       </div>
 
       <div className="auction-bet-button-container">
         <button className="auction-bet-button">
-          Поставити мінімальний хід: ${minBid}
+          {t.placeMinBid}: ${minBid}
         </button>
         <div className="auction-bet-actions-wrapper">
           <button className="auction-bet-action-button">
-            Зробити ставку на
+            {t.placeBidOn}
           </button>
           <div className="auction-bet-current-bid">
             ${currentUserBid}
@@ -83,7 +87,7 @@ const DemonstrationBet: React.FC<AuctionBetleProps> = ({
       </div>
 
       <div className="auction-bet-total-price">
-        Ціна з усіма налогами і комісіями: <b>${totalPrice.toLocaleString()}</b>
+        {t.totalPrice}: <b>${totalPrice.toLocaleString()}</b>
       </div>
     </div>
   );

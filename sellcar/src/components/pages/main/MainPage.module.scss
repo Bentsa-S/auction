@@ -4,9 +4,8 @@
   align-items: center;
   background: url("../../../assets/main-img-car-white.png") no-repeat center center;
   background-size: cover;
-  width: 100%;
   height: 100vh;
-  color: #fff;
+  color: var(--text-color);
   padding: 40px;
   border-radius: 10px;
 
@@ -20,19 +19,19 @@
       font-size: 42px;
       font-weight: bold;
       margin-bottom: 30px;
-      color: #fff;
+      color: #ccc;
     }
 
     .subtitle {
       font-size: 22px;
       margin-bottom: 40px;
       max-width: 700px;
-      color: #fff;
+      color: #ccc;
     }
 
     .button {
-      background-color: #ffcc00;
-      color: #333;
+      background-color: var(--main-color);
+      color: var(--text-color);
       padding: 15px 30px;
       font-size: 18px;
       font-weight: bold;
@@ -42,7 +41,7 @@
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #e6b800;
+        background-color: var(--main-color);
       }
     }
   }
@@ -53,25 +52,27 @@
   margin: auto;
   padding: 40px 20px;
   font-family: Arial, sans-serif;
-  color: #333;
+  color: var(--text-color);
 
   .stats {
     text-align: center;
     margin-bottom: 40px;
+    color: var(--text-color);
 
     .counter {
       font-weight: bold;
       display: flex;
       justify-content: center;
+      color: var(--text-color);
 
       .digit {
         background-color: rgba(0, 0, 0, 0.5);
         padding: 0.2rem 0.5rem;
         margin: 0 0.1rem;
         border-radius: 5px;
-        border: solid #af8f0d 1px;
+        border: solid var(--main-color) 1px;
         font-size: 5rem;
-        color: #fff;
+        color: var(--text-color);
       }
     }
 
@@ -131,15 +132,17 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
+      color: var(--text-color);
 
       .step {
         flex: 1 1 200px;
-        background: #ffcc00;
+        background: var(--main-color);
         padding: 20px;
         font-size: 18px;
         font-weight: bold;
         border-radius: 8px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        color: var(--text-color);
       }
     }
   }
@@ -147,7 +150,7 @@
 }
 .footer {
     background: #111;
-    color: #fff;
+    color: #ccc;
     padding: 40px 20px;
 
     .columns {
@@ -159,6 +162,7 @@
 
       .column {
         flex: 1 1 220px;
+        color: #ccc;
 
         h4 {
           font-size: 18px;
@@ -166,6 +170,7 @@
         }
 
         p,
+        h4,
         a {
           font-size: 14px;
           color: #ccc;
@@ -180,7 +185,7 @@
           font-size: 24px;
           font-weight: bold;
           margin-bottom: 10px;
-          color: #ffcc00;
+          color: #ccc;
         }
 
         .socials a {

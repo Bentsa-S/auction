@@ -1,31 +1,31 @@
 import styles from "./MainPage.module.scss";
+import { useLanguage } from '../../../LanguageContext';
+import { translations } from '../../../i18n';
 
 const MainPage: React.FC = () => {
+  const { lang } = useLanguage();
+  const t = translations[lang];
   return (
     <div>
       <header className={styles.header}>
         <div className={styles.container}>
-          <h1 className={styles.title}>
-            Купуй авто з аукціонів США, Кореї та Європи
-          </h1>
-          <p className={styles.subtitle}>
-            Понад 20 000 автомобілів щотижня. Доставка, розмитнення, повний супровід.
-          </p>
-          <button className={styles.button}>Переглянути авто</button>
+          <h1 className={styles.title}>{t.mainTitle}</h1>
+          <p className={styles.subtitle}>{t.mainSubtitle}</p>
+          <button className={styles.button}>{t.viewCars}</button>
         </div>
       </header>
 
       <div className={styles.container}>
         <div className={styles.container}>
         <section className={styles.info}>
-          <h2>Чому обирають саме нас</h2>
-          <h3>Ми знаємо, як зробити імпорт авто простим і вигідним</h3>
+          <h2>{t.whyUs}</h2>
+          <h3>{t.whyUsSubtitle}</h3>
           <ul>
-            <li>✔ Працюємо з аукціонами Copart, IAAI, Manheim, AutoHero</li>
-            <li>✔ Понад 8 років досвіду на ринку авто з-за кордону</li>
-            <li>✔ Повний супровід: від підбору до реєстрації авто в Україні</li>
-            <li>✔ Прозора калькуляція вартості ще до покупки</li>
-            <li>✔ Доставка в будь-яке місто України</li>
+            <li>{t.whyUs1}</li>
+            <li>{t.whyUs2}</li>
+            <li>{t.whyUs3}</li>
+            <li>{t.whyUs4}</li>
+            <li>{t.whyUs5}</li>
           </ul>
         </section>
       </div>
@@ -36,12 +36,12 @@ const MainPage: React.FC = () => {
         </section>
 
         <section className={styles.steps}>
-          <h2>Купуй транспортні засоби на аукціонах ЛЕГКО</h2>
+          <h2>{t.buyEasy}</h2>
           <div className={styles.stepsList}>
-            <div className={styles.step}>ЗАРЕЄСТРУЙСЯ</div>
-            <div className={styles.step}>ОБЕРИ</div>
-            <div className={styles.step}>ЗРОБИ СТАВКУ</div>
-            <div className={styles.step}>ВИГРАЙ</div>
+            <div className={styles.step}>{t.step1}</div>
+            <div className={styles.step}>{t.step2}</div>
+            <div className={styles.step}>{t.step3}</div>
+            <div className={styles.step}>{t.step4}</div>
           </div>
         </section>
       </div>
@@ -53,33 +53,31 @@ const MainPage: React.FC = () => {
       {/* Лого та короткий опис */}
       <div className={styles.column}>
         <h3 className={styles.logo}>AutoAuction</h3>
-        <p>
-          Допомагаємо обрати та купити авто з аукціонів США, Кореї та Європи. Повний супровід – від підбору до реєстрації.
-        </p>
+        <p>{t.footerDesc}</p>
       </div>
 
       {/* Навігація */}
       <div className={styles.column}>
-        <h4>Навігація</h4>
+        <h4>{t.navigation}</h4>
         <ul>
-          <li><a href="/catalog">Каталог авто</a></li>
-          <li><a href="/how-it-works">Як це працює</a></li>
-          <li><a href="/about">Про нас</a></li>
-          <li><a href="/contact">Контакти</a></li>
+          <li><a href="/catalog">{t.catalog}</a></li>
+          <li><a href="/how-it-works">{t.howItWorks}</a></li>
+          <li><a href="/about">{t.about}</a></li>
+          <li><a href="/contact">{t.contact}</a></li>
         </ul>
       </div>
 
       {/* Контакти */}
       <div className={styles.column}>
-        <h4>Контакти</h4>
-        <p>📍 м. Київ, вул. Велика Васильківська, 55</p>
+        <h4>{t.contacts}</h4>
+        <p>📍 {t.address}</p>
         <p>📞 +38 (067) 123-45-67</p>
         <p>📧 info@autoauction.ua</p>
       </div>
 
       {/* Соцмережі */}
       <div className={styles.column}>
-        <h4>Ми в соцмережах</h4>
+        <h4>{t.socials}</h4>
         <div className={styles.socials}>
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a><br />
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a><br />
@@ -91,8 +89,8 @@ const MainPage: React.FC = () => {
 
     {/* Низ футера */}
     <div className={styles.bottom}>
-      <p>© {new Date().getFullYear()} AutoAuction. Усі права захищені.</p>
-      <a href="/privacy">Політика конфіденційності</a>
+      <p>© {new Date().getFullYear()} AutoAuction. {t.rights}</p>
+      <a href="/privacy">{t.privacy}</a>
     </div>
   </div>
 </footer>

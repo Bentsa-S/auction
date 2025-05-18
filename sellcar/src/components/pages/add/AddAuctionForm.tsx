@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './AddAuctionForm.css';
 import { postAddAuction, uploadImages } from '../../../api/auction';
+import { getCategorie, postAddCategories } from '../../../api/categorie';
 import PhotoUploader from './sortablePhoto/PhotoUploader';
 import DemonstrationSlider from './demostration/slider/DemonstrationSlider';
 import DemonstrationBet from './demostration/bet/DemonstrationBet';
 import DemonstrationDescription from './demostration/description/DemonstrationDescription';
+import CategorySearch from '../recommendation/filter/CategorySearch';
+import { useCheckUser } from '../../../hock/useCheckUser';
+import { useLanguage } from '../../../LanguageContext';
+import { translations } from '../../../i18n';
 
 const AddAuctionForm: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -15,6 +20,8 @@ const AddAuctionForm: React.FC = () => {
   const [finish_at, setFinishAt] = useState('');
   const [photos, setPhotos] = useState<File[]>([]);
   const [activePhoto, setActivePhoto] = useState<File | null>(null);
+  const [category, setCategory] = useState('');
+  const [allCategories, setAllCategories] = useState<string[]>([]);
 
   const [errors, setErrors] = useState({
     title: false,
@@ -26,10 +33,25 @@ const AddAuctionForm: React.FC = () => {
     photos: false,
   });
 
+  const { lang } = useLanguage();
+  const t = translations[lang];
+
   useEffect(() => {
-    console.log(photos);
-  }, [photos]);
-    const token = localStorage.getItem('auction_token');
+    const fetchCategories = async () => {
+      try {
+        const cats = await getCategorie();
+        setAllCategories(cats);
+        console.log(cats);
+        
+      } catch (error) {
+        console.error('Помилка при отриманні категорій:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  const user = useCheckUser(true)
 
   const handleSubmit = async () => {
     const newErrors = {
@@ -41,32 +63,42 @@ const AddAuctionForm: React.FC = () => {
       finish_at: finish_at === '',
       photos: photos.length === 0,
     };
-    console.log(photos);
-    
+
     setErrors(newErrors);
 
-    const hasErrors = Object.values(newErrors).some(Boolean);
-    if (hasErrors) return;
+    // const hasErrors = Object.values(newErrors).some(Boolean);
+    // if (hasErrors) return;
 
     try {
-      const result = await postAddAuction({
-        title,
-        token,
-        description,
-        srart_price,
-        curr_price,
-        id_user,
-        finish_at,
-      });
+      // const result = await postAddAuction({
+      //   title,
+      //   token,
+      //   description,
+      //   srart_price,
+      //   curr_price,
+      //   id_user,
+      //   finish_at,
+      // });
 
-      console.log('Аукціон успішно додано:', result);
-      const id_auction = result.id;
-      console.log(photos);
+      // const id_auction = result.id;
+
+      // await uploadImages(photos, id_auction);
+
+        const categoryExists = allCategories.includes(category.trim());
+        console.log(categoryExists);
+        
+        if (!categoryExists) {
+          console.log(12);
+          if(user){
+            await postAddCategories(13, category.trim(), user);
+          }
+          console.log('Категорія додана:', category);
+        } else {
+          console.log('Категорія вже існує:', category);
+        }
       
-      const result2 =await uploadImages(photos, id_auction)
-      console.log(result2);
-      
-      console.log('Фотографії завантажено успішно');
+
+      console.log('Аукціон і фото успішно додані');
     } catch (error) {
       console.error('Помилка при додаванні аукціону або фото:', error);
     }
@@ -74,9 +106,9 @@ const AddAuctionForm: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <h2 className="title">Створення аукціону</h2>
+      <h2 className="title">{t.createAuction}</h2>
 
-      <label className="label">Назва</label>
+      <label className="label">{t.nameLabel}</label>
       <input
         className={`input ${errors.title ? 'error' : ''}`}
         value={title}
@@ -86,7 +118,7 @@ const AddAuctionForm: React.FC = () => {
         }}
       />
 
-      <label className="label">Опис</label>
+      <label className="label">{t.descriptionLabel}</label>
       <textarea
         className={`textarea ${errors.description ? 'error' : ''}`}
         value={description}
@@ -96,7 +128,7 @@ const AddAuctionForm: React.FC = () => {
         }}
       />
 
-      <label className="label">Стартова ціна</label>
+      <label className="label">{t.startPrice}</label>
       <input
         type="number"
         className={`input ${errors.srart_price ? 'error' : ''}`}
@@ -108,7 +140,7 @@ const AddAuctionForm: React.FC = () => {
         }}
       />
 
-      <label className="label">Поточна ціна</label>
+      <label className="label">{t.currentPrice}</label>
       <input
         type="number"
         className={`input ${errors.curr_price ? 'error' : ''}`}
@@ -120,19 +152,7 @@ const AddAuctionForm: React.FC = () => {
         }}
       />
 
-      <label className="label">ID користувача</label>
-      <input
-        type="number"
-        className={`input ${errors.id_user ? 'error' : ''}`}
-        value={id_user}
-        onChange={(e) => {
-          const val = Number(e.target.value);
-          setIdUser(val);
-          if (val > 0) setErrors((prev) => ({ ...prev, id_user: false }));
-        }}
-      />
-
-      <label className="label">Дата завершення</label>
+      <label className="label">{t.endDate}</label>
       <input
         type="datetime-local"
         className={`input ${errors.finish_at ? 'error' : ''}`}
@@ -143,13 +163,21 @@ const AddAuctionForm: React.FC = () => {
         }}
       />
 
+      <label className="label">{t.category}</label>
+      <CategorySearch
+        value={category}
+        onChange={setCategory}
+        allCategories={allCategories}   
+        showLabel = {false}   
+      />
+
       <PhotoUploader
         photos={photos}
         setPhotos={setPhotos}
         activePhoto={activePhoto}
         setActivePhoto={setActivePhoto}
       />
-      {errors.photos && <div className="error-message">Додайте хоча б одне фото</div>}
+      {errors.photos && <div className="error-message">{t.addPhotoError}</div>}
 
       <div className="car-details">
         <div className="left-section">
@@ -175,7 +203,7 @@ const AddAuctionForm: React.FC = () => {
       </div>
 
       <button className="submit-button" onClick={handleSubmit}>
-        Надіслати
+        {t.submit}
       </button>
     </div>
   );

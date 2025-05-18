@@ -2,14 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './RecommendationPage.css';
 import Card from '../card/Card';
 import FilterPanel from './filter/FilterPanel';
-import { getAddAuction } from '../../../api/auction';
-
-interface AuctionCard {
-  id: number;
-  title: string;
-  description: string;
-  finish_at: string;
-}
+import { getAuction } from '../../../api/auction';
 
 interface AuctionItem {
   id: number;
@@ -31,16 +24,6 @@ interface FilterData {
 const RecommendationPage: React.FC = () => {
   const [auctions, setAuctions] = useState<AuctionItem[]>([]);
 
-  const fetchAuctions = async () => {
-    try {
-      const response = await fetch('http://127.0.0.1:8000/get_auction');
-      const data = await response.json();
-      setAuctions(data);
-    } catch (err) {
-      console.error('Помилка завантаження аукціонів:', err);
-    }
-  };
-
   const fetchFilteredAuctions = async (filters: FilterData) => {
     const params = new URLSearchParams();
     if (filters.categorie) params.append('categorie', filters.categorie);
@@ -56,9 +39,20 @@ const RecommendationPage: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchAuctions();
+    const fetchData = async () => {
+      try {
+        const data = await getAuction();
+        console.log(data);
+        
+        setAuctions(data);
+      } catch (error) {
+        console.error('Помилка завантаження аукціонів:', error);
+      }
+    };
+  
+    fetchData();
   }, []);
-
+  
   return (
     <div className="page">
       <FilterPanel onFilter={fetchFilteredAuctions} />
@@ -67,7 +61,7 @@ const RecommendationPage: React.FC = () => {
         <div className="recommendations-header">Рекомендації</div>
         <div className="cards">
           {auctions.map(auction => (
-            <CarCard key={auction.id} data={auction} />
+            <Card key={auction.id} data={auction} />
           ))}
         </div>
       </section>

@@ -4,10 +4,15 @@ import AuthPanel from '../auth/AuthPanel';
 import { useCheckUser } from '../../hock/useCheckUser';
 import SettingsPanel from './../pages/settings/SettingsPanel';
 import { NavLink } from 'react-router-dom';
+import { useLanguage } from "../../Lo";
+import { translations } from "../../i18n";
+
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const user = useCheckUser();
+  const { lang, setLang } = useLanguage();
+  const t = translations[lang];
 
   const handleLogout = () => {
     localStorage.removeItem('auction_token');
@@ -34,7 +39,7 @@ const Navigation: React.FC = () => {
               isActive ? `${styles.link} ${styles.active}` : styles.link
             }
           >
-            Про нас
+            {t.about}
           </NavLink>
           <NavLink
             to={'/recomendation'}
@@ -42,7 +47,7 @@ const Navigation: React.FC = () => {
               isActive ? `${styles.link} ${styles.active}` : styles.link
             }
           >
-            Рекомендаціі
+            {t.recommendations}
           </NavLink>
           <NavLink
             to={'/follow'}
@@ -50,22 +55,24 @@ const Navigation: React.FC = () => {
               isActive ? `${styles.link} ${styles.active}` : styles.link
             }
           >
-            підписки
+            {t.subscriptions}
           </NavLink>
         </ul>
 
         <div className={styles.leftControls}>
-        <div className={styles.lang}>UA</div>
+          <button onClick={() => setLang(lang === "ua" ? "en" : "ua")} className={styles.lang}>
+            {lang === "ua" ? "EN" : "UA"}
+          </button>
 
           <div className={user ? styles.userBlock : ''}>
           {user ? (
             <>
               <span className={styles.username}>{user}</span>
-              <button onClick={handleLogout} className={styles.registerButton}>Вийти</button>
+              <button onClick={handleLogout} className={styles.registerButton}>{t.logout}</button>
             </>
           ) : (
             <>
-              <button className={styles.registerButton} onClick={() => setIsOpen(true)}>Відкрити реєстрацію</button>
+              <button className={styles.registerButton} onClick={() => setIsOpen(true)}>{t.openRegistration}</button>
               <AuthPanel isOpen={isOpen} onClose={() => setIsOpen(false)} />
             </>
           )}

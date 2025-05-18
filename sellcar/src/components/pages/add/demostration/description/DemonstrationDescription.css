@@ -1,6 +1,6 @@
 .vehicle-card {
-    border: 1px solid #f4c542;
-    background: #fff;
+    border: 1px solid var(--main-color);
+    background: var(--background);
     border-radius: 16px;
     height: 100%;
     width: 100%;
@@ -10,18 +10,21 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     font-family: Arial, sans-serif;
     position: relative;
+    color: var(--text-color-on-white);
   }
   
   .vehicle-card p {
     white-space: pre-wrap;
     word-wrap: break-word;
     line-height: 1.5;
+    color: var(--text-color-on-white);
   }
   
   .title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 16px;
+    color: var(--text-color-on-white);
   }
   
   .share-button {
@@ -36,10 +39,12 @@
   
   .bold {
     font-weight: bold;
+    color: var(--text-color);
   }
   
   .highlight {
     color: #b30000;
     font-weight: bold;
+    color: var(--text-color);
   }
   

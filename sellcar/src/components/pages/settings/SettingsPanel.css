@@ -23,7 +23,7 @@
   left: 0;
   width: 400px;
   height: 100vh;
-  background-color: #f9f9f9;
+  background-color: var(--background);
   padding: 24px;
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
   animation: slideIn 0.3s ease-out forwards;
@@ -90,6 +90,7 @@
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 12px;
+  color: var(--text-color-on-white);
 }
 
 .section-title {
@@ -97,12 +98,13 @@
   font-weight: 600;
   margin-top: 12px;
   padding-bottom: 10px;
-  border-bottom: 3px solid #f0cb3a;
+  border-bottom: 3px solid var(--main-color);
+  color: var(--text-color-on-white);
 }
 
 /* Buttons */
 .profile-button {
-  background-color: #007bff;
+  background-color: var(--main-color);
   color: white;
   padding: 10px 16px;
   border: none;
@@ -110,10 +112,11 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
+  color: var(--text-color);
 }
 
 .profile-button:hover {
-  background-color: #0056b3;
+  background-color: #012a56;
 }
 
 .logout-button {
@@ -127,6 +130,7 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
+  color: var(--text-color);
 }
 
 .logout-button:hover {
@@ -137,8 +141,10 @@
 .theme-select {
   padding: 6px 10px;
   border-radius: 6px;
+  background-color: var(--background);
   border: 1px solid #ccc;
   width: fit-content;
+  color: var(--text-color-on-white);
 }
 
 .theme-container{
@@ -152,6 +158,7 @@
   gap: 10px;
   align-items: center;
   justify-content: space-around;
+  color: var(--text-color);
 }
 
 .color-button {
@@ -162,6 +169,7 @@
   border: 2px solid #fff;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
+  color: var(--text-color);
 }
 
 .color-button:hover {

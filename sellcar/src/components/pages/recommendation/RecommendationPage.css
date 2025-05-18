@@ -1,15 +1,17 @@
 .page {
-    background-color: #f0f4f8;
+    background-color: var(--background);
     padding: 20px;
     font-family: sans-serif;
+    color: var(--text-color);
   }
   
   .filter {
-    background-color: white;
+    background-color: var(--background);
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
+    color: var(--text-color-on-white);
   }
   
   .filter h3 {
@@ -25,6 +27,7 @@
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 14px;
+    color: var(--text-color-on-white);
   }
   
   .filter button {
@@ -36,17 +39,20 @@
   }
   
   .recommendations-header {
-    background-color: #f0cb3a;
+    background-color: var(--main-color);
     padding: 10px;
     text-align: center;
     font-weight: bold;
     border-radius: 4px;
     margin-bottom: 10px;
+    color: var(--text-color);
   }
   
   .cards {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    color: var(--text-color-on-white);
+    background-color: var(--background);
   }
   

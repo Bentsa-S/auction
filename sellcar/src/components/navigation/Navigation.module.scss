@@ -1,9 +1,10 @@
 .navigation {
-  background-color: #f4c542;
+  background-color: var(--main-color);
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--text-color);
 }
 
 .leftControls {
@@ -29,6 +30,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 0;
+  color: var(--text-color);
 
   li {
     margin: 0 10px;
@@ -36,7 +38,8 @@
   }
 
   .lang {
-    margin-left: 20px;
+    color: var(--text-color);
+    margin-left: 200px;
   }
 }
 
@@ -48,6 +51,7 @@
 
 .username {
   font-weight: bold;
+  color: var(--text-color);
 }
 
 .logoutBtn {
@@ -55,12 +59,13 @@
   border: 1px solid black;
   padding: 5px 10px;
   cursor: pointer;
+  color: var(--text-color);
 }
 
 .link {
   position: relative;
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
   font-weight: bold;
 
   &.active::after {
@@ -96,44 +101,40 @@
   flex-direction: column;
   justify-content: space-between;
   z-index: 1000;
-}
 
-.burger span {
-  height: 3px;
-  width: 100%;
-  background: black;
-  border-radius: 2px;
-  transition: 0.3s ease;
-  transform-origin: center;
-}
+  span {
+    height: 3px;
+    width: 100%;
+    background: black;
+    border-radius: 2px;
+    transition: 0.3s ease;
+    transform-origin: center;
+  }
 
-.burger.active span:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
+  &.active {
+    span:nth-child(1) {
+      transform: rotate(45deg) translateY(8px);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-8px);
+    }
+  }
 }
-
-.burger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.burger.active span:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
-}
-
 
 .registerButton {
   padding: 10px;
   background-color: #f0f4f8;
   border: none;
   border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-}
+  color: var(--text-color-on-white);
 
-.registerButton:hover {
-  background-color: #e0e6ed;
-  transform: scale(1.05);
+  &:hover {
+    background-color: #e0e6ed;
+    transform: scale(1.05);
+  }
 }

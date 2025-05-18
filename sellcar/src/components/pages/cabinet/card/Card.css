@@ -1,12 +1,11 @@
 .car-card {
   display: flex;
   align-items: center;
-  width: 550px;
-  background-color: #ffffff;
+  background-color: var(--background);
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-decoration: none;
-  color: #222;
+  color: var(--text-color-on-white);
   overflow: hidden;
   transition: transform 0.2s ease;
 }
@@ -32,25 +31,26 @@
   font-size: 21px;
   font-weight: 600;
   margin-bottom: 10px;
-  color: #333;
+  color: var(--text-color-on-white);
 }
 
 .car-prices {
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
   gap: 4px;
   font-size: 15px;
   margin-bottom: 10px;
+  color: var(--text-color);
 }
 
 .car-prices span {
-  color: #777;
+  color: var(--text-color-on-white);
   font-size: 12px;
 }
 
 .car-description {
   font-size: 14px;
-  color: #555;
+  color: var(--text-color-on-white);
   margin-bottom: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -58,18 +58,19 @@
 
 .auction-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
+  color: var(--text-color);
 }
 
 .car-auction-end {
   font-size: 13px;
-  color: #999;
+  color: var(--text-color);
 }
 
 .place-bid-btn {
   background-color: #1e88e5;
-  color: #fff;
+  color: var(--text-color);
   border: none;
   border-radius: 8px;
   padding: 6px 12px;

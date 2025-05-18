@@ -1,4 +1,16 @@
-body{
-    margin: 0;
-    padding: 0;
+:root {
+  --main-color: #f0cb3a;
+  --text-color: #111;
+  --text-color-on-white: #111;
+  --background: #fff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+}
+
+* {
+  color: var(--text-color-on-white);
 }
