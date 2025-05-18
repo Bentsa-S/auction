@@ -1,39 +1,87 @@
-.card {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .card img {
-    width: 150px;
-    height: auto;
-    border-radius: 5px;
-  }
-  
-  .data-info{
-    margin-top: 20px;
-    display: flex;
-  }
-  .card-info {
-    flex: 1;
-    font-size: 14px;
-  }
-  
-  .stats-button {
-    background-color: #f5d55f;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    margin-top: auto;
-    height: fit-content;
-  }
-  
+.car-card {
+  display: flex;
+  align-items: center;
+  width: 550px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #222;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.car-card:hover {
+  transform: scale(1.02);
+}
+
+.car-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.car-info-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.car-title {
+  font-size: 21px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.car-prices {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.car-prices span {
+  color: #777;
+  font-size: 12px;
+}
+
+.car-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.auction-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.car-auction-end {
+  font-size: 13px;
+  color: #999;
+}
+
+.place-bid-btn {
+  background-color: #1e88e5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.place-bid-btn:hover {
+  background-color: #1565c0;
+}
+
+p{
+  margin: 0;
+}

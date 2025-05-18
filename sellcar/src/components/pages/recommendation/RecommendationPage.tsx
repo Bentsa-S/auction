@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import './RecommendationPage.css';
 import Card from '../card/Card';
 import FilterPanel from './filter/FilterPanel';
@@ -12,37 +11,64 @@ interface AuctionCard {
   finish_at: string;
 }
 
+interface AuctionItem {
+  id: number;
+  description: string;
+  curr_price: number;
+  created_at: string;
+  finish_at: string;
+  id_user: number;
+  srart_price: number;
+  title: string;
+  step_bit: number;
+}
+
+interface FilterData {
+  categorie?: string;
+  to?: string;
+}
+
 const RecommendationPage: React.FC = () => {
-  const [auction, setAuction] = useState<AuctionCard[]>([]);
+  const [auctions, setAuctions] = useState<AuctionItem[]>([]);
+
+  const fetchAuctions = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/get_auction');
+      const data = await response.json();
+      setAuctions(data);
+    } catch (err) {
+      console.error('Помилка завантаження аукціонів:', err);
+    }
+  };
+
+  const fetchFilteredAuctions = async (filters: FilterData) => {
+    const params = new URLSearchParams();
+    if (filters.categorie) params.append('categorie', filters.categorie);
+    if (filters.to) params.append('to', filters.to);
+
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/get_filter_auction?${params.toString()}`);
+      const data = await response.json();
+      setAuctions(data);
+    } catch (err) {
+      console.error('Помилка фільтрації аукціонів:', err);
+    }
+  };
 
   useEffect(() => {
-    const fetchAuction = async () => {
-      const a = await getAddAuction();
-      setAuction(a);
-    };
-  
-    fetchAuction();
+    fetchAuctions();
   }, []);
-  
+
   return (
     <div className="page">
-      <FilterPanel/>
+      <FilterPanel onFilter={fetchFilteredAuctions} />
 
       <section className="recommendations">
         <div className="recommendations-header">Рекомендації</div>
-
         <div className="cards">
-          {
-            auction && auction.length > 0 && auction.map((card) => (
-              <Card
-                key={card.id}
-                id={card.id}
-                title={card.title}
-                description={card.description}
-                finish_at={card.finish_at}
-              />
-            ))
-          }
+          {auctions.map(auction => (
+            <CarCard key={auction.id} data={auction} />
+          ))}
         </div>
       </section>
     </div>
