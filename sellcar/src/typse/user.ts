@@ -6,5 +6,5 @@ export interface ReagistrationPost{
 
 export interface LoginPost{
     password: string,
-    username: string
+    name: string
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import './AuthPanel.css';
 import { useAuthForm } from '../../hock/useAuthForm';
 import { postLogin, postRegistration } from '../../api/user';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   isOpen: boolean;
@@ -18,25 +19,25 @@ const AuthPanel: React.FC<Props> = ({ isOpen, onClose }) => {
     confirmPassword, setConfirmPassword,
     validateForm
   } = useAuthForm();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) {
-      alert('Будь ласка, заповніть усі поля правильно');
       return;
     }
   
     try {
       let userData;
       if (isLogin) {
-        userData = await postLogin({ username: name, password });
+        userData = await postLogin({ name: name, password });
       } else {
         userData = await postRegistration({ email, password, name });
       }
   
       if (userData) {
         localStorage.setItem('auction_token', userData);
-        alert('Успішно!');
+        navigate('/'); 
         onClose();
       }
     } catch (error) {

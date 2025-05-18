@@ -18,7 +18,7 @@ function App() {
         <Route path="/cars" element={<AddAuctionForm/>} />
         <Route path="/profile" element={<CabinetPage/>} />
         <Route path="/statistick/:id" element={<Statistick/>} />
-        <Route path="/home" element={<div>Сторінка дому</div>} />
+        <Route path="/add" element={<AddAuctionForm/>} />
         <Route path="*" element={<MainPage/>} />
         <Route path="/car/:id" element={<CarDetails />} />
       </Routes>

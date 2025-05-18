@@ -15,12 +15,11 @@ export const postRegistration = async ({ email, password, name }: ReagistrationP
     return response.data;
 };
 
-export const postLogin = async ({ username, password }: LoginPost) => {
+export const postLogin = async ({ name, password }: LoginPost) => {
   const params = new URLSearchParams();
   params.append('grant_type', 'password');
-  params.append('username', username);
+  params.append('username', name);
   params.append('password', password);
-    console.log(params);
     
   const response = await axios.post(
     'https://api-auction-cursova-production.up.railway.app/login',
@@ -30,9 +29,7 @@ export const postLogin = async ({ username, password }: LoginPost) => {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     }
-  );
-  console.log(response.status);
-  
+  );  
   return response.data;
 };
 

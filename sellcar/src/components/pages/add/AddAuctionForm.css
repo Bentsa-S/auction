@@ -16,7 +16,11 @@
     border-bottom: 2px solid gold;
   }
   
-  .input,
+  .input.error,
+  .textarea.error {
+    border: 2px solid red;
+  }
+    .input,
   .textarea {
     width: 100%;
     padding: 8px;

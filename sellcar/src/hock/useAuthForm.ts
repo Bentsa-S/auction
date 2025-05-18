@@ -10,7 +10,7 @@ export const useAuthForm = () => {
   const toggleMode = () => setIsLogin(!isLogin);
 
   const validateForm = (): boolean => {
-    console.log(email, password, confirmPassword);
+    console.log(email + ' ' + password + ' ' + name);
     
     if (!name || !password) return false;
     if (!isLogin) {

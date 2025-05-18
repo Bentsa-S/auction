@@ -60,7 +60,7 @@ const Navigation: React.FC = () => {
           <div className={user ? styles.userBlock : ''}>
           {user ? (
             <>
-              <span className={styles.username}>👤 {user}</span>
+              <span className={styles.username}>{user}</span>
               <button onClick={handleLogout} className={styles.registerButton}>Вийти</button>
             </>
           ) : (

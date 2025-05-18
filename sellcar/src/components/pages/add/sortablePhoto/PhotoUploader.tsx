@@ -34,6 +34,8 @@ const PhotoUploader: React.FC<PhotoUploaderProps> = ({
   const handleAddPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setPhotos([...photos, ...Array.from(e.target.files)]);
+      console.log(photos);
+      
     }
   };
 

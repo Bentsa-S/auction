@@ -17,10 +17,10 @@ const SettingsPanel: React.FC<Props> = ({ onClose }) => {
     setIsClosing(true);
   };
 
-  const goToProfile = () => {
+  function goToPage(path:string) {
     setIsClosing(true);
     setTimeout(() => {
-      navigate('/profile');
+      navigate(path);
     }, 300);
   };
 
@@ -55,8 +55,11 @@ const SettingsPanel: React.FC<Props> = ({ onClose }) => {
         <button className="closeBtn" onClick={handleClose}>✖</button>
         <h2 className="panel-title">Налаштування</h2>
 
-        <button className="profile-button" onClick={goToProfile}>
+        <button className="profile-button" onClick={() => goToPage('/profile')}>
           Особистий кабінет
+        </button>
+        <button className="profile-button" onClick={() => goToPage('/add')}>
+          Зроби свій аукціон
         </button>
 
         <div className='theme-container'>
