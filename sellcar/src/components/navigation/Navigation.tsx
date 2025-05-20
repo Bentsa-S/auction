@@ -1,21 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from "./Navigation.module.scss";
 import AuthPanel from '../auth/AuthPanel';
-import { useCheckUser } from '../../hock/useCheckUser';
-import SettingsPanel from './../pages/settings/SettingsPanel';
-import { NavLink } from 'react-router-dom';
-import { useLanguage } from "../../Lo";
+import { useLanguage } from "../../LanguageContext";
 import { translations } from "../../i18n";
+import { NavLink } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+import SettingsPanel from '../pages/settings/SettingsPanel';
+
+interface JwtPayload {
+  name?: string;
+  username?: string;
+  [key: string]: any;
+}
 
 const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const user = useCheckUser();
+  const [user, setUser] = useState<string | null>(null);
+
   const { lang, setLang } = useLanguage();
   const t = translations[lang];
 
+  useEffect(() => {
+    const token = localStorage.getItem('auction_token');
+    if (token) {
+      try {
+        const decoded = jwtDecode<JwtPayload>(token);
+        setUser(decoded.username || decoded.name || null);
+      } catch {
+        setUser(null);
+      }
+    }
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem('auction_token');
+    setUser(null);
     window.location.reload();
   };
 
@@ -23,15 +43,15 @@ const Navigation: React.FC = () => {
     <>
       <nav className={styles.navigation}>
         <ul className={styles.navList}>
-        <button
-          className={`${styles.burger} ${showSettings ? styles.active : ''}`}
-          onClick={() => setShowSettings(!showSettings)}
-          aria-label="Toggle settings"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+          <button
+            className={`${styles.burger} ${showSettings ? styles.active : ''}`}
+            onClick={() => setShowSettings(!showSettings)}
+            aria-label="Toggle settings"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
 
           <NavLink
             to={'/'}
@@ -65,20 +85,31 @@ const Navigation: React.FC = () => {
           </button>
 
           <div className={user ? styles.userBlock : ''}>
-          {user ? (
-            <>
-              <span className={styles.username}>{user}</span>
-              <button onClick={handleLogout} className={styles.registerButton}>{t.logout}</button>
-            </>
-          ) : (
-            <>
-              <button className={styles.registerButton} onClick={() => setIsOpen(true)}>{t.openRegistration}</button>
-              <AuthPanel isOpen={isOpen} onClose={() => setIsOpen(false)} />
-            </>
-          )}
+            {user ? (
+              <>
+                <span className={styles.username}>{user}</span>
+                <button onClick={handleLogout} className={styles.registerButton}>{t.logout}</button>
+              </>
+            ) : (
+              <>
+                <button className={styles.registerButton} onClick={() => setIsOpen(true)}>{t.openRegistration}</button>
+                <AuthPanel
+                  isOpen={isOpen}
+                  onClose={() => setIsOpen(false)}
+                  onLogin={(token: string) => {
+                    localStorage.setItem('auction_token', token);
+                    try {
+                      const decoded = jwtDecode<JwtPayload>(token);
+                      setUser(decoded.username || decoded.name || null);
+                    } catch {
+                      setUser(null);
+                    }
+                  }}
+                />
+              </>
+            )}
+          </div>
         </div>
-        </div>
-
       </nav>
 
       {showSettings && <SettingsPanel onClose={() => setShowSettings(false)} />}

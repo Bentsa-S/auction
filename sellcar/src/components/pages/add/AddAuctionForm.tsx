@@ -28,7 +28,6 @@ const AddAuctionForm: React.FC = () => {
     description: false,
     srart_price: false,
     curr_price: false,
-    id_user: false,
     finish_at: false,
     photos: false,
   });
@@ -52,37 +51,44 @@ const AddAuctionForm: React.FC = () => {
   }, []);
 
   const user = useCheckUser(true)
-
   const handleSubmit = async () => {
     const newErrors = {
       title: title.trim() === '',
       description: description.trim() === '',
       srart_price: srart_price <= 0,
       curr_price: curr_price < 0,
-      id_user: id_user <= 0,
       finish_at: finish_at === '',
       photos: photos.length === 0,
     };
 
     setErrors(newErrors);
 
-    // const hasErrors = Object.values(newErrors).some(Boolean);
-    // if (hasErrors) return;
+    const hasErrors = Object.values(newErrors).some(Boolean);
+        console.log(hasErrors);
 
+    if (hasErrors) return;
+    const token = user
+    if (!token) return
+    const base64Url = token.split('.')[1];
+    const decodedData = JSON.parse(atob(base64Url));
+    setIdUser(decodedData.user_id || decodedData.id);
+
+    if(token)
     try {
-      // const result = await postAddAuction({
-      //   title,
-      //   token,
-      //   description,
-      //   srart_price,
-      //   curr_price,
-      //   id_user,
-      //   finish_at,
-      // });
+      const result = await postAddAuction({
+        title,
+        token,
+        description,
+        srart_price,
+        curr_price,
+        id_user,
+        finish_at,
+      });
 
-      // const id_auction = result.id;
-
-      // await uploadImages(photos, id_auction);
+      const id_auction = result.id;
+      console.log(id_auction);
+      
+      await uploadImages(photos, id_auction);
 
         const categoryExists = allCategories.includes(category.trim());
         console.log(categoryExists);

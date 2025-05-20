@@ -19,6 +19,7 @@ export const postAddAuction = async ({
   srart_price,
   curr_price,
   finish_at,
+  id_user
 }: AuctionPost) => {
   const finish = finish_at + ':00.00';
   const data = {
@@ -26,12 +27,13 @@ export const postAddAuction = async ({
     description,
     srart_price,
     curr_price,
-    id_user: 13,
+    id_user,
     finish_at: finish,
   };
 
   console.log(data);
-
+  console.log(token);
+  
   const response = await axios.post(`${api}/add_auction`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -65,7 +67,7 @@ export const uploadImages = async (
     formData.append('file', image);
 
     try {
-      const response = await axios.post(`${api}/upload-to-bucket/`, formData, {
+      const response = await axios.post(`http://localhost:8001/upload`, formData, {
         params: { id_auction },
         headers: {
           'Content-Type': 'multipart/form-data',

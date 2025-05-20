@@ -9,9 +9,10 @@ import { translations } from '../../i18n';
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  onLogin: (token: string) => void;
 }
 
-const AuthPanel: React.FC<Props> = ({ isOpen, onClose }) => {
+const AuthPanel: React.FC<Props> = ({ isOpen, onClose, onLogin }) => {
   const {
     isLogin,
     toggleMode,
@@ -40,7 +41,7 @@ const AuthPanel: React.FC<Props> = ({ isOpen, onClose }) => {
       }
   
       if (userData) {
-        localStorage.setItem('auction_token', userData);
+        onLogin(userData);  // Передаємо токен наверх в Navigation
         navigate('/'); 
         onClose();
       }

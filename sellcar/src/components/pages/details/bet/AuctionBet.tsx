@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
+import useWebSocket, { ReadyState } from 'react-use-websocket';
 import 'react-circular-progressbar/dist/styles.css';
 import './AuctionBet.css';
+import { useCheckUser } from '../../../../hock/useCheckUser';
 
-interface AuctionBetleProps {
+interface AuctionBetProps {
   bid: number;
-  startTime: string; // формат: '2025-05-03T12:00:00'
+  startTime: string;
   durationMinutes: number;
   minBid: number;
   currentUserBid: number;
   totalPrice: number;
 }
 
-const AuctionBet: React.FC<AuctionBetleProps> = ({
+type AuctionMessage =
+  | { type: 'new_bid'; amount: number }
+  | { type: string; [key: string]: any };
+
+const AuctionBet: React.FC<AuctionBetProps> = ({
   bid,
   startTime,
   durationMinutes,
@@ -20,7 +27,22 @@ const AuctionBet: React.FC<AuctionBetleProps> = ({
   currentUserBid,
   totalPrice,
 }) => {
+  const { id } = useParams<{ id: string }>();
+  const auctionId = parseInt(id || '0', 10);
+
   const [progress, setProgress] = useState(0);
+  const [currentBid, setCurrentBid] = useState(bid);
+
+  const token = useCheckUser(true)
+  const socketUrl = `ws://localhost:8000/bit?id=${auctionId}&token=${token}`;
+
+  const {
+    sendJsonMessage,
+    lastJsonMessage,
+    readyState,
+  } = useWebSocket<AuctionMessage>(socketUrl, {
+    shouldReconnect: () => true,
+  });
 
   useEffect(() => {
     const start = new Date(startTime).getTime();
@@ -42,6 +64,17 @@ const AuctionBet: React.FC<AuctionBetleProps> = ({
     return () => clearInterval(interval);
   }, [startTime, durationMinutes]);
 
+  useEffect(() => {
+    if (lastJsonMessage?.type === 'new_bid') {
+      setCurrentBid(lastJsonMessage.amount);
+    }
+  }, [lastJsonMessage]);
+
+  const sendBid = () => {
+    const newBid = currentUserBid + minBid;
+    sendJsonMessage({ type: 'place_bid', amount: newBid });
+  };
+
   return (
     <div className="auction-bet-container">
       <div className="auction-bet-start-time">
@@ -60,30 +93,33 @@ const AuctionBet: React.FC<AuctionBetleProps> = ({
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/9/92/Flag_of_New_Jersey.svg"
               alt="NJ"
+              style={{ width: 40 }}
             />
             <div className="auction-bet-progress-title">New Jersey</div>
-            <div className="auction-bet-progress-bid">${bid.toLocaleString()}</div>
+            <div className="auction-bet-progress-bid">${currentBid.toLocaleString()}</div>
             <div className="auction-bet-progress-description">Bid!</div>
           </CircularProgressbarWithChildren>
         </div>
       </div>
 
       <div className="auction-bet-button-container">
-        <button className="auction-bet-button">
+        <button className="auction-bet-button" onClick={sendBid}>
           Поставити мінімальний хід: ${minBid}
         </button>
         <div className="auction-bet-actions-wrapper">
-          <button className="auction-bet-action-button">
+          <button className="auction-bet-action-button" onClick={sendBid}>
             Зробити ставку на
           </button>
-          <div className="auction-bet-current-bid">
-            ${currentUserBid}
-          </div>
+          <div className="auction-bet-current-bid">${currentUserBid}</div>
         </div>
       </div>
 
       <div className="auction-bet-total-price">
         Ціна з усіма налогами і комісіями: <b>${totalPrice.toLocaleString()}</b>
+      </div>
+
+      <div className="auction-bet-status">
+        Статус WebSocket: <b>{ReadyState[readyState]}</b>
       </div>
     </div>
   );
