@@ -26,6 +26,15 @@
     margin-bottom: 12px;
   }
   
+  .chat-messages {
+  height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 1rem;
+  background: #f9f9f9;
+}
+
   .auction-bet-progress {
     width: 180px;
     height: 180px;

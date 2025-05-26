@@ -49,6 +49,16 @@ export const getAuction = async () => {
   return response.data;
 };
 
+export const getAuctionById = async (id: number) => {
+    const response = await axios.get(`${api}/get_filter_auction`, {
+      params: { id },
+    });
+
+    console.log(response.data);
+    
+  return response.data;
+};
+
 export const getPhoto = async (id: number) => {
   const response = await axios.get(`${api}/get_photo`, {
     params: { id_auction: id },
@@ -60,6 +70,12 @@ export const uploadImages = async (
   images: File[],
   id_auction: number
 ): Promise<void> => {
+  const reversedImages = [...images].reverse(); 
+
+  console.log(reversedImages);
+  console.log(images);
+  
+
   for (const image of images) {
     console.log('Відправляється файл:', image);
 

@@ -10,6 +10,7 @@ import CategorySearch from '../recommendation/filter/CategorySearch';
 import { useCheckUser } from '../../../hock/useCheckUser';
 import { useLanguage } from '../../../LanguageContext';
 import { translations } from '../../../i18n';
+import { useNavigate } from "react-router-dom";
 
 const AddAuctionForm: React.FC = () => {
   const [title, setTitle] = useState('');
@@ -34,6 +35,7 @@ const AddAuctionForm: React.FC = () => {
 
   const { lang } = useLanguage();
   const t = translations[lang];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -86,7 +88,6 @@ const AddAuctionForm: React.FC = () => {
       });
 
       const id_auction = result.id;
-      console.log(id_auction);
       
       await uploadImages(photos, id_auction);
 
@@ -103,8 +104,7 @@ const AddAuctionForm: React.FC = () => {
           console.log('Категорія вже існує:', category);
         }
       
-
-      console.log('Аукціон і фото успішно додані');
+      navigate("/recomendation");
     } catch (error) {
       console.error('Помилка при додаванні аукціону або фото:', error);
     }
